@@ -9,7 +9,7 @@ passport.use(
     clientID: config.keys.google.clientID,
     clientSecret: config.keys.google.clientSecret,
   },
-  () => {
-    //passport callback function
+  (accessToken, refreshToken, profile, done) => {
+    console.log(profile);
   })
 );
