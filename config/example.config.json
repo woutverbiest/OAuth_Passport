@@ -14,5 +14,29 @@
     "mysql_database": "database",
     "mysql_user": "user",
     "mysql_password": "password"
+  },
+  "development": {
+    "username": "user",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "port": "port",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "user",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "port": "port",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "user",
+    "password": "password",
+    "database": "database",
+    "host": "host",
+    "port": "port",
+    "dialect": "mysql"
   }
 }

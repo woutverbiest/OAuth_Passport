@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node .",
-    "dev": "nodemon ."
+    "dev": "nodemon .",
+    "migrate": "npx sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "sequelize": "^5.21.11"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "sequelize-cli": "^5.5.1"
   }
 }
