@@ -1,1 +1,3 @@
-#OAuth_Passport
+# OAuth_Passport - WIP
+
+OAuth verification using third party companies like google, facebook, github...
