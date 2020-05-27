@@ -8,6 +8,9 @@
       "clientSecret": "clientSecret"
     }
   },
+  "session":{
+    "cookieKey" : "key"
+  },
   "database": {
     "mysql_host": "host",
     "mysql_port": "port",

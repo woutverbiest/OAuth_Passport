@@ -10,9 +10,12 @@ router.get("/logout", (req, res, next) => {
 });
 
 //auth methods
-router.get("/google", passport.authenticate('google', {
-    scope:['profile']
-}));
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile"],
+  })
+);
 
 router.get("/facebook", (req, res, next) => {
   res.send("loggin in with facebook");
@@ -30,9 +33,10 @@ router.get("/github", (req, res, next) => {
   res.send("loggin in with github");
 });
 
-
 //callbacks
-router.get('/google/redirect', passport.authenticate('google'), (req,res) => {
-    res.send('callback uri');
-})
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
+  console.log(req.user);
+  res.redirect("/");
+});
+
 module.exports = router;

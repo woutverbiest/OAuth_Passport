@@ -4,6 +4,16 @@ const User = require("../models/user");
 
 const config = require("./config.json");
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findByPk(id).then((user) => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -12,22 +22,20 @@ passport.use(
       clientSecret: config.keys.google.clientSecret,
     },
     (accessToken, refreshToken, profile, done) => {
-      console.log(profile);
-      createUser(profile.provider, profile.id, profile.displayName);
+      User.findByPk(profile.provider + "_" + profile.id)
+        .then((user) => {
+          if (user) {
+            console.log("already exists: " + user.username);
+            done(null, user);
+          } else {
+            User.create({
+              id: provider + "_" + id,
+              username: name,
+            }).then((user) => {
+              done(null, user);
+            });
+          }
+        })
     }
   )
 );
-
-async function createUser(provider, id, name){
-  const user = await User.create({
-    id: provider + "_" + id,
-    username: name,
-  }).catch((err) => {
-    console.log(err);
-    res.status(500).json({
-      error: err,
-    });
-  });
-
-  console.log(user);
-}
