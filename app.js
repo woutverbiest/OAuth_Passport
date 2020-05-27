@@ -1,23 +1,25 @@
 const express = require("express");
-const app = express();
-
-const passportSetup = require("./config/passport");
-const config = require("./config/config.json");
 const cookieSession = require("cookie-session");
 const passport = require("passport");
 
 const authRoutes = require("./routes/auth");
 const profileRoutes = require("./routes/profile");
 
+const passportSetup = require("./config/passport");
 const db = require("./config/database");
+const config = require("./config/config.json");
+
+const app = express();
 
 app.set("view engine", "ejs");
 
-app.use(cookieSession({
-  maxAge: 24 * 60 * 60 * 1000,
-  keys: [config.session.cookieKey],
-  sameSite: true,
-}));
+app.use(
+  cookieSession({
+    maxAge: 24 * 60 * 60 * 1000,
+    keys: [config.session.cookieKey],
+    sameSite: true,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());

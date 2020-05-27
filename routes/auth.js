@@ -35,7 +35,6 @@ router.get("/github", (req, res, next) => {
 
 //callbacks
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
-  console.log(req.user);
   res.redirect("/");
 });
 
