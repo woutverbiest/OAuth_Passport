@@ -1,0 +1,18 @@
+{
+  "server": {
+    "port": "portnumber"
+  },
+  "keys": {
+    "google": {
+      "clientID": "clientID",
+      "clientSecret": "clientSecret"
+    }
+  },
+  "database": {
+    "mysql_host": "host",
+    "mysql_port": "port",
+    "mysql_database": "database",
+    "mysql_user": "user",
+    "mysql_password": "password"
+  }
+}

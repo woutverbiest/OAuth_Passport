@@ -1,8 +1,0 @@
-{
-    "keys": {
-        "google": {
-            "clientID":"clientID",
-            "clientSecret":"clientSecret"
-        }
-    }
-}
