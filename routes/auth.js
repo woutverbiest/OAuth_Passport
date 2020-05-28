@@ -7,7 +7,7 @@ router.get("/login", (req, res, next) => {
 
 router.get("/logout", (req, res, next) => {
   req.logout();
-  res.redirect('/')
+  res.redirect("/");
 });
 
 //auth methods
@@ -37,6 +37,18 @@ router.get("/github", (req, res, next) => {
 //callbacks
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.redirect("/");
+});
+router.get("/facebook/redirect", (req, res, next) => {
+  res.send("redirecting from facebook");
+});
+router.get("/linkedin/redirect", (req, res, next) => {
+  res.send("redirecting from linkedin");
+});
+router.get("/twitter/redirect", (req, res, next) => {
+  res.send("redirecting from twitter");
+});
+router.get("/github/redirect", (req, res, next) => {
+  res.send("redirecting from github");
 });
 
 module.exports = router;
