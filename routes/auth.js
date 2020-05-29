@@ -20,16 +20,14 @@ router.get(
 
 router.get("/facebook", passport.authenticate("facebook"));
 
+router.get("/github", passport.authenticate("github"));
+
 router.get("/linkedin", (req, res, next) => {
   res.send("loggin in with linkedin");
 });
 
 router.get("/twitter", (req, res, next) => {
   res.send("loggin in with twitter");
-});
-
-router.get("/github", (req, res, next) => {
-  res.send("loggin in with github");
 });
 
 //callbacks
@@ -43,14 +41,14 @@ router.get(
     res.redirect("/");
   }
 );
+router.get("/github/redirect", passport.authenticate("github"), (req, res) => {
+  res.redirect("/");
+});
 router.get("/linkedin/redirect", (req, res, next) => {
   res.send("redirecting from linkedin");
 });
 router.get("/twitter/redirect", (req, res, next) => {
   res.send("redirecting from twitter");
-});
-router.get("/github/redirect", (req, res, next) => {
-  res.send("redirecting from github");
 });
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
+const GitHubStrategy = require("passport-github").Strategy;
 const User = require("../models/user");
 
 const config = require("./config.json");
@@ -53,6 +54,30 @@ passport.use(
         } else {
           User.create({
             id: profile.provider + "_" + profile.id,
+            username: profile.displayName,
+          }).then((user) => {
+            done(null, user);
+          });
+        }
+      });
+    }
+  )
+);
+
+passport.use(
+  new GitHubStrategy(
+    {
+      callbackURL: "/auth/github/redirect",
+      clientID: config.keys.github.clientID,
+      clientSecret: config.keys.github.clientSecret,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findByPk("github_" + profile.id).then((user) => {
+        if (user) {
+          done(null, user);
+        } else {
+          User.create({
+            id: "github_" + profile.id,
             username: profile.displayName,
           }).then((user) => {
             done(null, user);
