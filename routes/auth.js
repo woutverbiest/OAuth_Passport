@@ -18,9 +18,7 @@ router.get(
   })
 );
 
-router.get("/facebook", (req, res, next) => {
-  res.send("loggin in with facebook");
-});
+router.get("/facebook", passport.authenticate("facebook"));
 
 router.get("/linkedin", (req, res, next) => {
   res.send("loggin in with linkedin");
@@ -38,9 +36,13 @@ router.get("/github", (req, res, next) => {
 router.get("/google/redirect", passport.authenticate("google"), (req, res) => {
   res.redirect("/");
 });
-router.get("/facebook/redirect", (req, res, next) => {
-  res.send("redirecting from facebook");
-});
+router.get(
+  "/facebook/redirect",
+  passport.authenticate("facebook"),
+  (req, res) => {
+    res.redirect("/");
+  }
+);
 router.get("/linkedin/redirect", (req, res, next) => {
   res.send("redirecting from linkedin");
 });
