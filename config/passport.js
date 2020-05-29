@@ -72,12 +72,12 @@ passport.use(
       clientSecret: config.keys.github.clientSecret,
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findByPk("github_" + profile.id).then((user) => {
+      User.findByPk(profile.provider + "_" + profile.id).then((user) => {
         if (user) {
           done(null, user);
         } else {
           User.create({
-            id: "github_" + profile.id,
+            id: profile.provider + "_" + profile.id,
             username: profile.displayName,
           }).then((user) => {
             done(null, user);
