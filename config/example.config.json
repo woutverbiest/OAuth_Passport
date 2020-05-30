@@ -18,6 +18,10 @@
     "linkedin": {
       "clientID": "clientID",
       "clientSecret": "clientsecret"
+    },
+    "twitter": {
+      "consumerKey": "consumerkey",
+      "consumerSecret": "consumersecret"
     }
   },
   "session":{
