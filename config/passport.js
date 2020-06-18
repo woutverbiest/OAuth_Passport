@@ -3,6 +3,7 @@ const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const GitHubStrategy = require("passport-github").Strategy;
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
+const TwitterStrategy = require("passport-twitter").Strategy;
 const User = require("../models/user");
 
 const config = require("./config.json");
@@ -95,7 +96,7 @@ passport.use(
       callbackURL: "/auth/linkedin/redirect",
       clientID: config.keys.linkedin.clientID,
       clientSecret: config.keys.linkedin.clientSecret,
-      scope: ['r_emailaddress', 'r_basicprofile'],
+      scope: ["r_emailaddress", "r_basicprofile"],
     },
     (accessToken, refreshToken, profile, done) => {
       User.findByPk(profile.provider + "_" + profile.id).then((user) => {
@@ -112,4 +113,28 @@ passport.use(
       });
     }
   )
-)
+);
+
+passport.use(
+  new TwitterStrategy(
+    {
+      callbackURL: "/auth/twitter/redirect",
+      consumerKey: config.keys.twitter.apiKey,
+      consumerSecret: config.keys.twitter.apiSecret,
+    },
+    (accessToken, refreshToken, profile, done) => {
+      User.findByPk(profile.provider + "_" + profile.id).then((user) => {
+        if (user) {
+          done(null, user);
+        } else {
+          User.create({
+            id: profile.provider + "_" + profile.id,
+            username: profile.displayName,
+          }).then((user) => {
+            done(null, user);
+          });
+        }
+      });
+    }
+  )
+);
